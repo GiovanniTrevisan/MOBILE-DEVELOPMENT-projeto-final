@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon/screens/login_screen.dart';
 import 'package:pokemon/screens/pokemon_screen.dart';
+import 'package:pokemon/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: LoginScreen.id,
+      home: Splash(),
       routes: {
         LoginScreen.id: (context) => const LoginScreen(),
         PokemonScreen.id: (context) => const PokemonScreen()

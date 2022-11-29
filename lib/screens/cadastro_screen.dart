@@ -15,17 +15,22 @@ class CadastroScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'Cadastro',
+                style: TextStyle(
+                  fontSize: 32,
+                ),
+              ),
+              SizedBox(height: 30),
               TextField(
                 decoration: const InputDecoration(
                   label: Text('Nome Completo'),
-                  // hintText: 'Email',
                 ),
               ),
               SizedBox(height: 20),
               TextField(
                 decoration: const InputDecoration(
                   label: Text('Email'),
-                  // hintText: 'Email',
                 ),
               ),
               SizedBox(height: 20),
@@ -33,7 +38,6 @@ class CadastroScreen extends StatelessWidget {
                 obscureText: true,
                 decoration: const InputDecoration(
                   label: Text('Senha'),
-                  // hintText: 'Email',
                 ),
               ),
               SizedBox(height: 20),
@@ -41,7 +45,6 @@ class CadastroScreen extends StatelessWidget {
                 obscureText: true,
                 decoration: const InputDecoration(
                   label: Text('Confirmar Senha'),
-                  // hintText: 'Email',
                 ),
               ),
               SizedBox(height: 30),

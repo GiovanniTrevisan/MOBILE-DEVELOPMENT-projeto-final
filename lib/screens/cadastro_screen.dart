@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokemon/screens/pokemon_screen.dart';
-import 'package:pokemon/screens/cadastro_screen.dart';
+class CadastroScreen extends StatelessWidget {
+  static const String id = 'cadastro_screen';
 
-class LoginScreen extends StatelessWidget {
-  static const String id = 'login_screen';
-
-  const LoginScreen({Key? key}) : super(key: key);
+  const CadastroScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 32,
+              TextField(
+                decoration: const InputDecoration(
+                  label: Text('Nome Completo'),
+                  // hintText: 'Email',
                 ),
               ),
               SizedBox(height: 20),
@@ -39,24 +37,11 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Material(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(16),
-                elevation: 4,
-                child: InkWell(
-                  child: ListTile(
-                    title: Text(
-                      'Login',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        PokemonScreen.id,
-                      );
-                    },
-                  ),
+              TextField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  label: Text('Confirmar Senha'),
+                  // hintText: 'Email',
                 ),
               ),
               SizedBox(height: 30),
@@ -67,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                 child: InkWell(
                   child: ListTile(
                     title: Text(
-                      'Cadastre-se',
+                      'Cadastrar',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
                     ),

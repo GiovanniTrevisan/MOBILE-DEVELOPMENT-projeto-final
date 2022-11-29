@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon/screens/cadastro_screen.dart';
 import 'package:pokemon/screens/login_screen.dart';
 import 'package:pokemon/screens/pokemon_screen.dart';
 import 'package:pokemon/screens/splash_screen.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       home: Splash(),
       routes: {
         LoginScreen.id: (context) => const LoginScreen(),
+        CadastroScreen.id: (context) => const CadastroScreen(),
         PokemonScreen.id: (context) => const PokemonScreen()
       }
     );

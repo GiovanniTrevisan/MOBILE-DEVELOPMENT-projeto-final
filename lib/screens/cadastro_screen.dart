@@ -1,9 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pokemon/screens/login_screen.dart';
+import 'package:pokemon/screens/pokemon_screen.dart';
 
-class CadastroScreen extends StatelessWidget {
+class CadastroScreen extends StatefulWidget {
   static const String id = 'cadastro_screen';
+  const CadastroScreen({super.key});
 
-  const CadastroScreen({Key? key}) : super(key: key);
+  @override
+  State<StatefulWidget> createState() => _CadastroScreenState();
+}
+
+class _CadastroScreenState extends State<CadastroScreen> {
+
+  final _cadastro_email = TextEditingController();
+  final _cadastro_password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,30 +32,19 @@ class CadastroScreen extends StatelessWidget {
                   fontSize: 32,
                 ),
               ),
-              SizedBox(height: 30),
-              TextField(
-                decoration: const InputDecoration(
-                  label: Text('Nome Completo'),
-                ),
-              ),
               SizedBox(height: 20),
               TextField(
+                controller: _cadastro_email,
                 decoration: const InputDecoration(
                   label: Text('Email'),
                 ),
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _cadastro_password,
                 obscureText: true,
                 decoration: const InputDecoration(
                   label: Text('Senha'),
-                ),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  label: Text('Confirmar Senha'),
                 ),
               ),
               SizedBox(height: 30),
@@ -59,11 +59,43 @@ class CadastroScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        CadastroScreen.id,
-                      );
+                    onTap: () async {
+                      try {
+                        final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          email: _cadastro_email.text,
+                          password: _cadastro_password.text,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Cadastro feito com sucesso.'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                        Navigator.pushNamed(
+                          context,
+                          PokemonScreen.id,
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          print('The password provided is too weak.');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('A senha é muito fraca.'),
+                              backgroundColor: Colors.redAccent,
+                            ),
+                          );
+                        } else if (e.code == 'email-already-in-use') {
+                          print('The account already exists for that email.');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Conta existente para este e-mail.'),
+                              backgroundColor: Colors.redAccent,
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                 ),

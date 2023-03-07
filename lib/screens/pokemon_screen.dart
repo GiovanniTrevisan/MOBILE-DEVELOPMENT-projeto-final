@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:pokemon/screens/login_screen.dart';
 import 'package:pokemon/screens/model/pokemon_model.dart';
+import 'package:pokemon/screens/splash_screen.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -37,6 +41,19 @@ class _PokemonScreenState extends State<PokemonScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      floatingActionButton: FloatingActionButton(
+        child: Text('Sair'),
+        onPressed: () async {
+          await FirebaseAuth.instance.signOut();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Logout feito com sucesso.'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            Navigator.pushReplacementNamed(context, LoginScreen.id);
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.separated(

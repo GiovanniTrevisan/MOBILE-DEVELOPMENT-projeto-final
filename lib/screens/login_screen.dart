@@ -1,12 +1,22 @@
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:pokemon/screens/pokemon_screen.dart';
 import 'package:pokemon/screens/cadastro_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
 
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _email = TextEditingController();
+  final _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +35,7 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _email,
                 decoration: const InputDecoration(
                   label: Text('Email'),
                   // hintText: 'Email',
@@ -32,6 +43,7 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _password,
                 obscureText: true,
                 decoration: const InputDecoration(
                   label: Text('Senha'),
@@ -50,11 +62,38 @@ class LoginScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        PokemonScreen.id,
-                      );
+                    onTap: () async {
+                      try {
+                        final credential = await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: _email.text, password: _password.text);
+                        Navigator.pushReplacementNamed(
+                            context, PokemonScreen.id);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Login feito com sucesso.'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          print('No user found for that email.');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Usuário não encontrado.'),
+                              backgroundColor: Colors.redAccent,
+                            ),
+                          );
+                        } else if (e.code == 'wrong-password') {
+                          print('Wrong password provided for that user.');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Sua senha está errada.'),
+                              backgroundColor: Colors.redAccent,
+                            ),
+                          );
+                        }
+                      }
                     },
                   ),
                 ),

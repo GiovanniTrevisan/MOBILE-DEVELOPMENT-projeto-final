@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "135706391491",
+    "project_id": "mobile-flutter-app-1fc01",
+    "storage_bucket": "mobile-flutter-app-1fc01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135706391491:android:fbae91b8b825db33ba0376",
+        "android_client_info": {
+          "package_name": "com.example.pokemon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135706391491-tsnltcqefou19jbefoes732fh5i9n9df.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsKqaL0cAhiRvD_dzluq7en6mungsGf7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135706391491-tsnltcqefou19jbefoes732fh5i9n9df.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "135706391491-t64ffeel0omq9ap83fpth0ovuv5tqive.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pokemon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

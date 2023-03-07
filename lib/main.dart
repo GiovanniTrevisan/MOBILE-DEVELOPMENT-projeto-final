@@ -1,11 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon/screens/cadastro_screen.dart';
 import 'package:pokemon/screens/login_screen.dart';
 import 'package:pokemon/screens/pokemon_screen.dart';
 import 'package:pokemon/screens/splash_screen.dart';
 
-void main() {
+void main() async{
   runApp(const MyApp());
+  await Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Splash(),
       routes: {
-        LoginScreen.id: (context) => const LoginScreen(),
+        LoginScreen.id: (context) => LoginScreen(),
         CadastroScreen.id: (context) => const CadastroScreen(),
         PokemonScreen.id: (context) => const PokemonScreen()
       }

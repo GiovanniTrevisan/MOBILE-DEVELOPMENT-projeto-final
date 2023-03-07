@@ -16,9 +16,11 @@ Aplicativo com conexão com a API https://pokeapi.co/ para consultas de Pokémon
 - Tela de login :heavy_check_mark:
 - Consulta lista de Pokémons :heavy_check_mark:
 - Conexão com https://pokeapi.co/ :heavy_check_mark:
+- Firebase Authentication :heavy_check_mark:
 
 ## Tech Stack
 Tecnologias utilizadas
 - Dart
 - Flutter
 - Github Features
+- Firebase
